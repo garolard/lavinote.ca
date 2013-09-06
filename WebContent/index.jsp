@@ -1,5 +1,9 @@
+<%@page import="es.gabrielferreiro.apps.lavinoteca.model.Vino"%>
+<%@page import="java.util.List"%>
+<%@page import="es.gabrielferreiro.apps.lavinoteca.service.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -7,6 +11,10 @@
 		<title>lavinote.ca</title>
 		<link rel="stylesheet" type="text/css" href="css/index.css" />
     </head>
+    <%
+    	IVinoService service = VinoServiceFactory.createVinoService();
+    	List<Vino> todosVinos = service.obtenerTodos();
+    %>
     <body>
         <div id="header">
             <img src="img/logo.png" alt="La Vinote.ca" />
@@ -26,46 +34,22 @@
                     <div class="home-vine-container" id="nuevos-container">
                         <h2 class="home-vine-container-header">Novedades</h2>
                         <div class="home-vine-container-row">
-                            <div class="home-vine-item">
-                                <img src="img/wine-stock.jpg" width="100" height="100" />
-                                <p class="home-vine-item-info-first-line">Do Ferreiro Cepas Vellas</p>
-                                <p>24,95€</p>
-                            </div>
-                            <div class="home-vine-item">
-                                <img src="img/wine-stock.jpg" width="100" height="100" />
-                                <p class="home-vine-item-info-first-line">
-                                    Do Ferreiro Cepas Vellas
-                                </p>
-                                <p>24,95€</p>
-                            </div>
-                            <div class="home-vine-item">
-                                <img src="img/wine-stock.jpg" width="100" height="100" />
-                                <p class="home-vine-item-info-first-line">
-                                    Do Ferreiro Cepas Vellas
-                                </p>
-                                <p>24,95€</p>
-                            </div>
-                        </div>
+                        	<%
+                        	int contador = 0;
+                        	for (Vino vino : todosVinos) { 
+                        		if (contador == 3) { %>
+                        	</div>
                         <div class="home-vine-container-row">
-                            <div class="home-vine-item">
-                                <img src="img/wine-stock.jpg" width="100" height="100" />
-                                <p class="home-vine-item-info-first-line">Do Ferreiro Cepas Vellas</p>
-                                <p>24,95€</p>
+                        		<%}%>
+                        	<div class="home-vine-item">
+	                            <img src="<%= vino.getRutaImagen() %>" width="100" height="100" />
+	                            <p class="home-vine-item-info-first-line"><%= vino.getNombre() %></p>
+	                            <p>24,95€</p>
                             </div>
-                            <div class="home-vine-item">
-                                <img src="img/wine-stock.jpg" width="100" height="100" />
-                                <p class="home-vine-item-info-first-line">
-                                    Do Ferreiro Cepas Vellas
-                                </p>
-                                <p>24,95€</p>
-                            </div>
-                            <div class="home-vine-item">
-                                <img src="img/wine-stock.jpg" width="100" height="100" />
-                                <p class="home-vine-item-info-first-line">
-                                    Do Ferreiro Cepas Vellas
-                                </p>
-                                <p>24,95€</p>
-                            </div>
+                        	<%
+                        		contador++;
+                        	}
+                        	%>
                         </div>
                     </div>
                     <p class="home-vine-container-footer">Todas las novedades &gt;</p>
