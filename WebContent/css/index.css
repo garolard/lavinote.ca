@@ -1,0 +1,151 @@
+@font-face {
+    font-family: Segoe;
+    src: url('../fonts/segoe.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: Champagne;
+    src: url('../fonts/champagne.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    height: 100%;
+    background-image: url('../img/main-background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+body:before {
+    content: " ";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.55);
+}
+
+#header {
+    position: relative;
+    margin-top: .5em;
+    margin-left: 4em;
+    float: left;
+}
+
+#section {
+    width: 75%;
+    height: auto;
+    /*background: rgba(189, 191, 124, 0.3);*/
+    margin: 0 auto;
+    clear: both;
+}
+
+#article {
+    float: right;
+    width: 75%;
+    color: white;
+}
+
+#aside {
+    float: left;
+    margin-top: 5em;
+    width: 25%;
+    color: white;
+}
+
+#aside ul {
+    list-style: none;
+}
+
+#aside ul li {
+    font-family: Segoe,  sans-serif;
+    text-transform: uppercase;
+}
+
+.hero-title {
+    color: white;
+    font-family: Champagne, sans-serif;
+    font-size: 3em;
+}
+
+.search-form select {
+    margin-right: 0;
+    height: 1.5em;
+    border-radius: 6px 0px 0px 6px;
+    border-style: none;
+    font-size: 1.2em;
+}
+
+.search-form #query-input {
+    margin-left: -5px;
+    margin-right: 0;
+    width: 20em;
+    height: 1.5em;
+    font-size: 1.2em;
+}
+
+.search-form input[type=submit] {
+    background: white;
+    margin-left: -5;
+    height: 1.5em;
+    border-radius: 0px 5px 5px 0px;
+    border-style: none;
+    font-size: 1.157em;
+}
+
+#home-vine-containers {
+    width: 100%;
+    height: 40em;
+}
+
+.home-vine-container {
+    width: 100%;
+    height: 50%;
+    padding: 1em 0;
+    display: table;
+}
+
+.home-vine-container-header {
+    margin-bottom: 0;
+    font-family: Segoe, sans-serif;
+    font-weight: lighter;
+}
+
+.home-vine-container-footer {
+    margin-top: -35;
+    display: inline-block;
+    position: relative;
+    left: 90%;
+    font-family: Segoe, sans-serif;
+    font-weight: lighter;
+    font-size: .7em;
+}
+
+.home-vine-container-row {
+    display: table-row;
+}
+
+.home-vine-item {
+    width: 33.3%;
+    display: table-cell;
+}
+
+.home-vine-item p {
+    margin: 0 auto;
+}
+
+.home-vine-item img {
+    float: left;
+    margin-right: .5em;
+    box-shadow: 0px 1px 3px #000;
+}
+
+.home-vine-item-info-first-line {
+    margin-bottom: 0;
+    font-weight: bold;
+    font-family: sans-serif;
+    color: #cbb86a;
+    text-overflow: clip;
+}
