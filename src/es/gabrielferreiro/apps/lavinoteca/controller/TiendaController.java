@@ -35,6 +35,9 @@ public class TiendaController {
 		carrito.put(todos.get(4), 1);
 		session.setAttribute("carrito", carrito);
 		
+		if (session.getAttribute("logueado") == null)
+			session.setAttribute("logueado", false);
+		
 		return "/index.jsp";
 	}
 }

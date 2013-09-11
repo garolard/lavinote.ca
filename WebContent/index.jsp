@@ -1,3 +1,4 @@
+<%@page import="es.gabrielferreiro.apps.lavinoteca.model.Cliente"%>
 <%@page import="es.gabrielferreiro.apps.lavinoteca.model.Vino"%>
 <%@page import="java.util.List"%>
 <%@page import="es.gabrielferreiro.apps.lavinoteca.service.*"%>
@@ -19,9 +20,15 @@
             <img src="../img/logo.png" alt="La Vinote.ca" />
         </div>
         <div id="login-form-container">
-            <form id="login-form">
-                <p>Usuario: <input type="text" name="usuario" /> Contraseña: <input type="password" name="usuarioclave" /> <a href="#">Loguearse</a> | <a href="#">Registrarse</a></p>
+            <form id="login-form" action="usuario/loguear" method="POST">
+            <% if (! (Boolean)session.getAttribute("logueado") ) {%>
+                <p>Usuario:
+                	<input type="text" name="email" /> Contraseña: <input type="password" name="contrasenha" /> <input type="submit" value="Loguearse" /> | <a href="#">Registrarse</a></p>
+                </form>
                 <p><a href="../tienda/carrito">Mi Carrito</a>
+            <%} else {%>
+            	<p><%= ((Cliente) session.getAttribute("cliente")).getNombre() %></p>
+            <%} %>
             </form>
         </div>
         <div id="section">
