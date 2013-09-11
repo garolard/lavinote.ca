@@ -1,31 +1,27 @@
 package es.gabrielferreiro.apps.lavinoteca.servlet;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import es.gabrielferreiro.apps.lavinoteca.model.Vino;
 import es.gabrielferreiro.apps.lavinoteca.service.IVinoService;
 
 /**
- * Servlet implementation class IndiceServlet
+ * Servlet implementation class EliminarCarritoServlet
  */
-@WebServlet("/Indice")
-public class IndiceServlet extends BaseServlet {
+@WebServlet("/EliminarCarrito")
+public class EliminarCarritoServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
-     * @see HttpServlet#HttpServlet()
+     * Default constructor. 
      */
-    public IndiceServlet() {
-        super();
+    public EliminarCarritoServlet() {
         // TODO Auto-generated constructor stub
     }
 
@@ -33,20 +29,17 @@ public class IndiceServlet extends BaseServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Entro en el servlet");
 		IVinoService vinoService = getApplicationContext().getBean("vinoService", IVinoService.class);
+		Map<Vino, Integer> carrito = (Map<Vino, Integer>)request.getSession().getAttribute("carrito");
+		Integer vinoId = Integer.parseInt(request.getParameter("id"));
 		
-		HttpSession session = request.getSession();
-		session.setAttribute("todosVinos", vinoService.obtenerTodos());
+		Vino vino = vinoService.obtener(vinoId);
+		if (vino != null)
+			carrito.remove(vino);
 		
-		Map<Vino, Integer> carrito = new HashMap<>();
-		carrito.put(vinoService.obtenerTodos().get(0), 1);
-		carrito.put(vinoService.obtenerTodos().get(1), 1);
-		carrito.put(vinoService.obtenerTodos().get(2), 1);
-		carrito.put(vinoService.obtenerTodos().get(3), 1);
-		carrito.put(vinoService.obtenerTodos().get(4), 1);
-		session.setAttribute("carrito", carrito);
-		
-		response.sendRedirect("index.jsp");
+		request.getSession().setAttribute("carrito", carrito);
+		response.sendRedirect("user.jsp");
 	}
 
 }

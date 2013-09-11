@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>La vinote.ca</title>
+        <meta charset="utf-8" />
+        <meta http-equiv="content-language" content="es">
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+    </head>
+    <body>
+        <div id="header">
+            <img src="img/logo.png" alt="La Vinote.ca" />
+        </div>
+        <div id="login-form-container">
+            <form id="login-form">
+                <p>Usuario: <input type="text" name="usuario" /> Contraseña: <input type="password" name="usuarioclave" /> <a href="#">Loguearse</a> | <a href="#">Registrarse</a></p>
+            </form>
+        </div>
+        <div id="section">
+            <div id="article">
+                <form class="search-form">
+                    <select>
+                        <option value="bodegas">Bodegas</option>
+                        <option value="vinos">Vinos</option>
+                        <option value="categoria">Categoría</option>
+                    </select>
+                    <input type="text" placeholder="Buscar vinos..." value="" id="query-input" />
+                    <input type="submit" value="Buscar" />
+                </form>
+                <div id="home-vine-containers">
+                    <!-- Insertar contenido dinámico del cuerpo de la página -->
+                </div>
+            <div id="aside">
+                <ul>
+                    <li>Vinos blancos</li>
+                    <li>Vinos tintos</li>
+                    <li>Vinos rosados</li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

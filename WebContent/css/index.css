@@ -18,7 +18,6 @@ html {
 
 body {
     margin: 0;
-    height: 100%;
 }
 
 body:before {
@@ -67,6 +66,21 @@ body:before {
 #aside ul li {
     font-family: Segoe,  sans-serif;
     text-transform: uppercase;
+}
+
+#login-form-container {
+    float: right;
+    margin-top: 1em;
+    margin-right: 1em;
+    color: white;
+}
+
+#login-form-container input[type=text] {
+    width: 6em;
+}
+
+#login-form-container input[type=password] {
+    width: 6em;
 }
 
 .hero-title {

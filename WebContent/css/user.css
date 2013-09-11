@@ -1,0 +1,66 @@
+html { 
+  background: url('../img/bottles-background.jpg') no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#user-lists-container {
+    float: right;
+    margin-top: 3em;
+    padding: 5px 10px;
+    height: 35em;
+}
+
+.overflow-item-list {
+    padding: 0;
+    height: 24em;
+    width: 300px;
+    overflow-y: auto;
+    list-style-type: none;
+    font-family: Segoe, sans-serif;
+}
+
+.overflow-item-list li {
+    margin-top: .6em;
+}
+
+#user-cart-total-container {
+    text-align: right;
+}
+
+.hero-text {
+    font-size: 2.5em;
+    font-family: Segoe, sans-serif;
+    text-shadow: 0px 2px 0px rgba(0, 0, 0, 1);
+}
+
+#user-add-to-cart {
+    background: none;
+    font-size: 1.3em;
+    color: white;
+    border: none;
+}
+
+#user-add-to-cart:before {
+    content: url('../img/wine-stock.jpg');
+}
+
+#user-history-container {
+    float: left;
+    margin-top: 3em;
+    padding: 5px 10px;
+    height: 35em;
+}
+
+#home-vine-item a:link {
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+#home-vine-item a:visited {
+	color: white;
+	text-decoration: none;
+}

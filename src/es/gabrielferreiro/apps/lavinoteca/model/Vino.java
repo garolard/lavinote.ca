@@ -1,6 +1,7 @@
 package es.gabrielferreiro.apps.lavinoteca.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class Vino implements Serializable {
 	private static final long serialVersionUID = -8353064160680635042L;
@@ -10,17 +11,18 @@ public class Vino implements Serializable {
 	private VinoCategoria categoria;
 	private Bodega bodega;
 	private String elaboracion;
-	private Integer cosecha;
+	private Date cosecha;
 	private String rutaImagen;
+	private Float precioUnitario;
 	
 	public Vino() {}
 	
-	public Vino(String nombre, VinoCategoria categoria, Bodega bodega, String rutaImagen) {
-		this(nombre, categoria, bodega, rutaImagen, null, null);
+	public Vino(String nombre, VinoCategoria categoria, Bodega bodega, Float precioUnitario, String rutaImagen) {
+		this(nombre, categoria, bodega, rutaImagen, null, null, precioUnitario);
 	}
 
 	public Vino(String nombre, VinoCategoria categoria, Bodega bodega,
-			String rutaImagen, String elaboracion, Integer cosecha) {
+			String rutaImagen, String elaboracion, Date cosecha, Float precioUnitario) {
 		super();
 		this.nombre = nombre;
 		this.categoria = categoria;
@@ -28,6 +30,7 @@ public class Vino implements Serializable {
 		this.setRutaImagen(rutaImagen);
 		this.elaboracion = elaboracion;
 		this.cosecha = cosecha;
+		this.setPrecioUnitario(precioUnitario);
 	}
 
 	public Integer getId() {
@@ -78,12 +81,45 @@ public class Vino implements Serializable {
 		this.elaboracion = elaboracion;
 	}
 
-	public Integer getCosecha() {
+	public Date getCosecha() {
 		return cosecha;
 	}
 
-	public void setCosecha(Integer cosecha) {
+	public void setCosecha(Date cosecha) {
 		this.cosecha = cosecha;
+	}
+
+	public Float getPrecioUnitario() {
+		return precioUnitario;
+	}
+
+	public void setPrecioUnitario(Float precioUnitario) {
+		this.precioUnitario = precioUnitario;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Vino other = (Vino) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 	
 }

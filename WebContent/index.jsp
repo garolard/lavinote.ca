@@ -9,15 +9,20 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>lavinote.ca</title>
-		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="../css/index.css" />
     </head>
     <%
-    	IVinoService service = VinoServiceFactory.createVinoService();
-    	List<Vino> todosVinos = service.obtenerTodos();
+    	List<Vino> todosVinos = (List<Vino>)session.getAttribute("todosVinos");
     %>
     <body>
         <div id="header">
-            <img src="img/logo.png" alt="La Vinote.ca" />
+            <img src="../img/logo.png" alt="La Vinote.ca" />
+        </div>
+        <div id="login-form-container">
+            <form id="login-form">
+                <p>Usuario: <input type="text" name="usuario" /> Contraseña: <input type="password" name="usuarioclave" /> <a href="#">Loguearse</a> | <a href="#">Registrarse</a></p>
+                <p><a href="../tienda/carrito">Mi Carrito</a>
+            </form>
         </div>
         <div id="section">
             <div id="article">
@@ -42,9 +47,9 @@
                         <div class="home-vine-container-row">
                         		<%}%>
                         	<div class="home-vine-item">
-	                            <img src="<%= vino.getRutaImagen() %>" width="100" height="100" />
+	                            <img src="../<%= vino.getRutaImagen() %>" width="100" height="100" />
 	                            <p class="home-vine-item-info-first-line"><%= vino.getNombre() %></p>
-	                            <p>24,95€</p>
+	                            <p><%= vino.getPrecioUnitario() %> €</p>
                             </div>
                         	<%
                         		contador++;

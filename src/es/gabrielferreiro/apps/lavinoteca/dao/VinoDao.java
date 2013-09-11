@@ -14,37 +14,49 @@ public class VinoDao implements IVinoDao {
 	{
 		todosVinos = new LinkedList<>();
 		for (int i = 0; i < 6; i++) {
+			Vino vino = null;
 			if (i % 2 == 0) {
-				todosVinos.add(new Vino("Ferreiro Cepas Vellas", VinoCategoria.TINTO, null,
-						"img/wine-stock.jpg"));
+				vino = new Vino("Ferreiro Cepas Vellas", VinoCategoria.TINTO, null, 24.99f,
+						"img/wine-stock.jpg");
+				vino.setId(i);
+				todosVinos.add(vino);
 			} else {
-				todosVinos.add(new Vino("Protos Reserva", VinoCategoria.TINTO, null,
-						"img/wine-stock-2.jpg"));
+				vino = new Vino("Protos Reserva", VinoCategoria.TINTO, null, 35.95f,
+						"img/wine-stock-2.jpg");
+				vino.setId(i);
+				todosVinos.add(vino);
 			}
 		}
 	}
 	
 	@Override
 	public Integer agregar(Vino obj) {
-		// TODO Auto-generated method stub
-		return null;
+		todosVinos.add(obj);
+		return obj.getId();
 	}
 
 	@Override
-	public void modificar(Vino obj) {
-		// TODO Auto-generated method stub
-
+	public void modificar(Vino obj) {		
 	}
 
 	@Override
 	public void eliminar(Integer clave) {
-		// TODO Auto-generated method stub
-
+		for (int i = 0; i < todosVinos.size(); i++) {
+			Vino v = todosVinos.get(i);
+			if (v.getId() == clave) {
+				todosVinos.remove(i);
+				break;
+			}
+		}
 	}
 
 	@Override
 	public Vino obtener(Integer clave) {
-		// TODO Auto-generated method stub
+		for (Vino v : todosVinos) {
+			if (v.getId() == clave) {
+				return v;
+			}
+		}
 		return null;
 	}
 
