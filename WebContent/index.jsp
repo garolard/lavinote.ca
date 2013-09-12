@@ -23,11 +23,12 @@
             <form id="login-form" action="usuario/loguear" method="POST">
             <% if (! (Boolean)session.getAttribute("logueado") ) {%>
                 <p>Usuario:
-                	<input type="text" name="email" /> Contraseña: <input type="password" name="contrasenha" /> <input type="submit" value="Loguearse" /> | <a href="#">Registrarse</a></p>
+                	<input type="text" name="email" /> Contraseña: <input type="password" name="contrasenha" /> <input type="submit" value="Loguearse" /> | <a href="../tienda/usuario/registro">Registrarse</a></p>
                 </form>
                 <p><a href="../tienda/carrito">Mi Carrito</a>
             <%} else {%>
-            	<p><%= ((Cliente) session.getAttribute("cliente")).getNombre() %></p>
+            	<p><%= ((Cliente) session.getAttribute("cliente")).getNombre() %> | <a href="usuario/desloguear">Desloguear</a></p>
+            	<p><a href="../tienda/carrito">Mi Carrito</a>
             <%} %>
             </form>
         </div>
@@ -57,6 +58,7 @@
 	                            <img src="../<%= vino.getRutaImagen() %>" width="100" height="100" />
 	                            <p class="home-vine-item-info-first-line"><%= vino.getNombre() %></p>
 	                            <p><%= vino.getPrecioUnitario() %> €</p>
+	                            <a href="../tienda/home/agregar?id=<%= vino.getId() %>">Agregar</a>
                             </div>
                         	<%
                         		contador++;

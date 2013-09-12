@@ -21,6 +21,12 @@ public class UsuarioController {
 	@RequestMapping(value="/usuario/loguear", method=RequestMethod.POST)
 	public String loguear(
 			@RequestParam("email") String email, @RequestParam("contrasenha") String contrasenha, HttpSession session) {
+		
+		// Hay un cliente en sesión, entiendo que viene de un registro
+		if (session.getAttribute("cliente") != null)
+			return "redirect:/tienda/home";
+		
+		// No hay cliente en sesión, autenticar
 		Cliente cliente = clienteService.obtener(email, contrasenha); // Deberia llamarse autenticar
 		
 		if (cliente != null) {
@@ -33,4 +39,30 @@ public class UsuarioController {
 		return "redirect:/tienda/home";
 	}
 	
+	@RequestMapping("/usuario/registro")
+	public String formularioRegistrar() {
+		return "/register.jsp";
+	}
+	
+	@RequestMapping(value="/usuario/registrar", method=RequestMethod.POST)
+	public String registrar(
+			Cliente cliente, HttpSession session) {
+		cliente.setId(clienteService.obtenerTodos().size()); // Este ID deberia asignarlo el Dao al crear el objeto
+		clienteService.crear(cliente);
+		
+		// Logueo al cliente al finalizar el registro
+		session.setAttribute("cliente", cliente);
+		session.setAttribute("logueado", true);
+		
+		return "redirect:/tienda/home";
+	}
+	
+	@RequestMapping("/usuario/desloguear")
+	public String desloguear(HttpSession session) {
+		if (session.getAttribute("cliente") != null)
+			session.setAttribute("cliente", null);
+		session.setAttribute("logueado", false);
+		
+		return "redirect:/tienda/home";
+	}
 }

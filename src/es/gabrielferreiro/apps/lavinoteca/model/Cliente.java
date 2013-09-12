@@ -20,6 +20,8 @@ public class Cliente implements Serializable {
 	private Integer codigoPostal;
 	private List<Pedido> historialCompras;
 	
+	public Cliente(){}
+	
 	public Cliente(String correo, String contrasenha, String nombre,
 			String apellido, String direccion) {
 		this(correo, contrasenha, nombre, apellido, direccion, null, null, null, null, null, null);

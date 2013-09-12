@@ -31,6 +31,18 @@ body:before {
     background: rgba(0, 0, 0, 0.55);
 }
 
+a {
+	color: white;
+}
+
+a:link {
+	color: white;
+}
+
+a:visited {
+	color: gray;
+}
+
 #header {
     position: relative;
     margin-top: .5em;
