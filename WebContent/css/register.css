@@ -1,0 +1,20 @@
+#register-form {
+    width:13em;
+    margin-left: 7em;
+    margin-bottom: 3em;
+}
+
+#register-form li {
+    margin-bottom: 1em;
+    text-align: center;
+    list-style-type:none;
+}
+
+#register-form li p {
+    text-align: left;
+}
+
+#register-form li input {
+    height: 2em;
+    
+}
