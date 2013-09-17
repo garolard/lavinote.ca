@@ -11,7 +11,7 @@ import es.gabrielferreiro.apps.lavinoteca.model.Vino;
 public class VinoService implements IVinoService {
 
 	@Autowired
-	private IVinoDao vinoDao;
+	IVinoDao vinoDao;
 	
 	public Vino obtener(Integer vinoId) {
 		return vinoDao.obtener(vinoId);
@@ -24,6 +24,21 @@ public class VinoService implements IVinoService {
 	
 	public void setVinoDao(IVinoDao vinoDao) {
 		this.vinoDao = vinoDao;
+	}
+
+	@Override
+	public List<Vino> obtenerNovedades() {
+		return vinoDao.obtenerNovedades();
+	}
+
+	@Override
+	public List<Vino> obtenerVendidos() {
+		// TODO Auto-generated method stub
+		return vinoDao.obtenerVendidos();
+	}
+	
+	public List<Vino> obtenerBusqueda(String busqueda) {
+		return vinoDao.obtenerBusqueda(busqueda);
 	}
 
 }

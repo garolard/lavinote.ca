@@ -4,42 +4,42 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import es.gabrielferreiro.apps.lavinoteca.model.Bodega;
+import es.gabrielferreiro.apps.lavinoteca.model.LineaPedido;
 
-public class BodegaDao extends BaseDao implements IBodegaDao {
-	
+public class LineaPedidoDao extends BaseDao implements ILineaPedidoDao {
+
 	@Override
-	public void agregar(Bodega obj) {
+	public void agregar(LineaPedido obj) {
 		em.persist(obj);
 	}
 
 	@Override
-	public void modificar(Bodega obj) {
+	public void modificar(LineaPedido obj) {
 		em.merge(obj);
 	}
 
 	@Override
 	public void eliminar(Integer clave) {
-		Bodega target = obtener(clave);
+		LineaPedido target = obtener(clave);
 		em.remove(target);
 	}
 
 	@Override
-	public Bodega obtener(Integer clave) {
+	public LineaPedido obtener(Integer clave) {
 		EntityManager em = this.em;
 		if (em == null)
 			em = entityManagerFactory.createEntityManager();
 		
-		return em.find(Bodega.class, clave);
+		return em.find(LineaPedido.class, clave);
 	}
 
 	@Override
-	public List<Bodega> obtenerTodos() {
+	public List<LineaPedido> obtenerTodos() {
 		EntityManager em = this.em;
 		if (em == null)
 			em = entityManagerFactory.createEntityManager();
 		
-		return (List<Bodega>) em.createQuery("from Bodega").getResultList();
+		return (List<LineaPedido>) em.createQuery("from LineaPedido").getResultList();
 	}
 
 }

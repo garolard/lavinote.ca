@@ -12,6 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,23 +20,26 @@ import es.gabrielferreiro.apps.lavinoteca.model.Vino;
 import es.gabrielferreiro.apps.lavinoteca.service.IVinoService;
 
 @Controller
+@RequestMapping("/home/*")
 public class TiendaController {
 	
 	@Autowired
 	IVinoService vinoService;
 	
-	@RequestMapping("/home")
+	public void setVinoService(IVinoService vinoService) {
+		this.vinoService = vinoService;
+	}
+
+	@RequestMapping("principal")
 	public String home(HttpSession session, Model model) {
-		List<Vino> todos = vinoService.obtenerTodos();
-		session.setAttribute("todosVinos", todos);
+		List<Vino> novedades = vinoService.obtenerNovedades();
+		session.setAttribute("novedades", novedades);
+		
+		List<Vino> vendidos = vinoService.obtenerVendidos();
+		session.setAttribute("vendidos", vendidos);
 		
 		if (session.getAttribute("carrito") == null) {
 			Map<Vino, Integer> carrito = new HashMap<>();
-			/*carrito.put(todos.get(0), 1);
-			carrito.put(todos.get(1), 1);
-			carrito.put(todos.get(2), 1);
-			carrito.put(todos.get(3), 1);
-			carrito.put(todos.get(4), 1);*/
 			session.setAttribute("carrito", carrito);
 		}
 		
@@ -45,21 +49,35 @@ public class TiendaController {
 		return "/index.jsp";
 	}
 	
-	@RequestMapping("/home/agregar")
+	@RequestMapping("agregar")
 	public String agregar(@RequestParam("id") Integer id, HttpSession session) {
 		boolean carritoVacio = false;
 		Map<Vino, Integer> carrito = (Map<Vino, Integer>)session.getAttribute("carrito");
 		
 		if (carrito == null) {
-			carrito = new HashMap<>();
+			carrito = new HashMap<Vino, Integer>();
 			carritoVacio = true;
 		}
+		
+		if (carrito.size() == 0)
+			carritoVacio = true;
 		
 		Vino target = vinoService.obtener(id);
 		
 		if (carritoVacio || !carrito.containsKey(target))
 			carrito.put(target, 1);
 		
-		return "forward:/tienda/carrito";
+		session.setAttribute("carrito", carrito);
+		
+		return "principal";
+	}
+	
+	@RequestMapping(value="buscar", method=RequestMethod.GET)
+	public String buscar(HttpSession session, @RequestParam("query-text") String query) {
+		List<Vino> resultados = vinoService.obtenerBusqueda(query);
+		
+		session.setAttribute("resultados", resultados);
+		
+		return "/search.jsp";
 	}
 }

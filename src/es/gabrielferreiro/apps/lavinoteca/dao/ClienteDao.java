@@ -3,66 +3,71 @@ package es.gabrielferreiro.apps.lavinoteca.dao;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
+
 import es.gabrielferreiro.apps.lavinoteca.model.Cliente;
+import es.gabrielferreiro.apps.lavinoteca.model.Vino;
 
-public class ClienteDao implements IClienteDao {
-
-	private List<Cliente> todosClientes;
+public class ClienteDao extends BaseDao implements IClienteDao {
 	
-	{
-		todosClientes = new LinkedList<>();
-		todosClientes.add(new Cliente("gbril9119@outlook.com", "abc123", "Gabriel", "Ferreiro", "blkasbhuybas"));
-	}
+	public ClienteDao() {super();}
 	
 	@Override
-	public Integer agregar(Cliente obj) {
-		todosClientes.add(obj);
-		return obj.getId();
+	public void agregar(Cliente obj) {
+		EntityManager em = this.em;
+		if (em == null)
+			em = entityManagerFactory.createEntityManager();
+		
+		em.persist(obj);
 	}
 
 	@Override
 	public void modificar(Cliente obj) {
-		// TODO Auto-generated method stub
-
+		em.merge(obj);
 	}
 
 	@Override
 	public void eliminar(Integer clave) {
 		
-		for (Cliente c : todosClientes) {
-			if (c.getId() == clave) {
-				todosClientes.remove(c);
-				break;
-			}
-		}
+		Cliente elemento = obtener(clave);
+		if (elemento != null)
+			em.remove(elemento);
 		
 	}
 
 	@Override
 	public Cliente obtener(Integer clave) {
 		
-		for (Cliente c : todosClientes) {
-			if (c.getId() == clave) {
-				return c;
-			}
-		}
+		EntityManager em = this.em;
+		if (em == null)
+			em = entityManagerFactory.createEntityManager();
 		
-		return null;
+		return em.find(Cliente.class, clave);
 		
 	}
 
 	@Override
 	public List<Cliente> obtenerTodos() {
-		return todosClientes;
+		EntityManager em = this.em;
+		if (em == null)
+			em = entityManagerFactory.createEntityManager();
+		
+		return (List<Cliente>) em.createQuery("from Cliente").getResultList();
 	}
 
 	@Override
 	public Cliente autenticar(String correo, String contrasenha) {
-		for (Cliente c : todosClientes) {
-			if (c.getCorreo().equals(correo) && c.getContrasenha().equals(contrasenha))
-				return c;
-		}
-		return null;
+		EntityManager em = this.em;
+		if (em == null)
+			em = entityManagerFactory.createEntityManager();
+		
+		Query q = em.createQuery("from Cliente where correo = :correo and contrasenha = :contrasenha");
+		q.setParameter("correo", correo);
+		q.setParameter("contrasenha", contrasenha);
+		
+		Cliente c = (Cliente) q.getSingleResult();
+		return c;
 	}
 
 }
