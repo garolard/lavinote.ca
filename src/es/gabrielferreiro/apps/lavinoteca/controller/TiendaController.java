@@ -80,4 +80,13 @@ public class TiendaController {
 		
 		return "/search.jsp";
 	}
+	
+	@RequestMapping(value="categoria", method=RequestMethod.GET)
+	public String filtrar(HttpSession session, @RequestParam("cat") Byte categoria) {
+		List<Vino> resultados = vinoService.obtenerPorCategoria(categoria);
+		
+		session.setAttribute("resultados", resultados);
+		
+		return "/search.jsp";
+	}
 }

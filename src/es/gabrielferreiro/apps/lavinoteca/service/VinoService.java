@@ -40,5 +40,10 @@ public class VinoService implements IVinoService {
 	public List<Vino> obtenerBusqueda(String busqueda) {
 		return vinoDao.obtenerBusqueda(busqueda);
 	}
+	
+	@Override
+	public List<Vino> obtenerPorCategoria(Byte idCat) {
+		return vinoDao.obtenerPorCategoria(idCat);
+	}
 
 }

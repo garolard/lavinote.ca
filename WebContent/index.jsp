@@ -142,9 +142,9 @@
             </div>
             <div id="aside">
                 <ul>
-                    <li>Vinos blancos</li>
-                    <li>Vinos tintos</li>
-                    <li>Vinos rosados</li>
+                    <li><a href="categoria?cat=0">Vinos tintos</a></li>
+                    <li><a href="categoria?cat=1">Vinos blancos</a></li>
+                    <li><a href="categoria?cat=2">Vinos rosados</a></li>
                 </ul>
             </div>
         </div>

@@ -44,7 +44,8 @@ public class CarritoController {
 	public String resumen(HttpSession session) {
 		
 		// No hay usuario logueado, nos saltamos el listado de compras
-		if (session.getAttribute("cliente") == null)
+		boolean logueado = (Boolean) session.getAttribute("logueado");
+		if (!logueado || session.getAttribute("cliente") == null )
 			return "/user.jsp";
 		
 		Cliente cliente = (Cliente) session.getAttribute("cliente");

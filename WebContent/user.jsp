@@ -24,9 +24,16 @@
     <%
     	Map<Vino, Integer> carrito = (Map<Vino, Integer>)session.getAttribute("carrito");
     	Cliente cliente = (Cliente) session.getAttribute("cliente");
-    	List<Pedido> clientePedidos = cliente.getPedidos();
-    	if (clientePedidos == null)
+    	List<Pedido> clientePedidos = null;
+    	
+    	if (cliente != null) {
+    		clientePedidos = cliente.getPedidos();
+    	}
+    	
+    	if (clientePedidos == null) {
     		clientePedidos = new LinkedList<Pedido>();
+    	}
+    	
     	Float precioCalculado = 0f;
     %>
     <body>

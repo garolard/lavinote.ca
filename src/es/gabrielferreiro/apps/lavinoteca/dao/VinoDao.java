@@ -86,5 +86,16 @@ public class VinoDao extends BaseDao implements IVinoDao {
 		return (List<Vino>) query.getResultList();
 		
 	}
+	
+	public List<Vino> obtenerPorCategoria(Byte idCat) {
+		EntityManager em = this.em;
+		if (em == null)
+			em = entityManagerFactory.createEntityManager();
+		
+		Query query = em.createQuery("select v from Vino v where v.categoria = :idCat");
+		query.setParameter("idCat", idCat);
+		
+		return (List<Vino>) query.getResultList();
+	}
 
 }
